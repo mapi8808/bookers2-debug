@@ -3,9 +3,9 @@ class UsersController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update]
 
   def show
+    @book_new = Book.new
     @user = User.find(params[:id])
     @books = @user.books.all
-    @book_new = Book.new
   end
 
   def index
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to users_path(@user)
+      redirect_to user_path(@user)
       flash[:notice] = "You have updated user successfully."
     else
       @users = User.find(params[:id])
