@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to users_path(@user)
-      frash[:notice] = "You have updated user successfully."
+      flash[:notice] = "You have updated user successfully."
     else
       @users = User.find(params[:id])
       render :show
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 
   def ensure_correct_user
     @user = User.find(params[:id])
-    if @user.id != current_user
+    if @user.id != current_user.id
       redirect_to user_path(current_user.id)
     end
   end
